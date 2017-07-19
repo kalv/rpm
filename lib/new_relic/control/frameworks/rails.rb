@@ -74,7 +74,7 @@ module NewRelic
           begin
             require 'new_relic/rack/agent_hooks'
             return unless NewRelic::Rack::AgentHooks.needed?
-            config.middleware.use NewRelic::Rack::AgentHooks
+            config.middleware.insert 0, NewRelic::Rack::AgentHooks
             ::NewRelic::Agent.logger.debug("Installed New Relic Agent Hooks middleware")
           rescue => e
             ::NewRelic::Agent.logger.warn("Error installing New Relic Agent Hooks middleware", e)
